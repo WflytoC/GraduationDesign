@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FetchNews.iml" filepath="$PROJECT_DIR$/.idea/modules/FetchNews.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FetchNews_main.iml" filepath="$PROJECT_DIR$/.idea/modules/FetchNews_main.iml" group="FetchNews" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FetchNews_test.iml" filepath="$PROJECT_DIR$/.idea/modules/FetchNews_test.iml" group="FetchNews" />
+    </modules>
+  </component>
+</project>
