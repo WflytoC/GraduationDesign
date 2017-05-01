@@ -1,11 +1,18 @@
+import characteristic.ContentResult;
+import characteristic.StructureResult;
+import characteristic.URLResult;
+import component.ExtractComponent;
 import database.DBUtils;
 import handler.content.ContentsHandler;
+import handler.structure.StructureHandler;
 import handler.url.URLHandler;
 import model.News;
 import parse.ParseNews;
 
+import java.net.ContentHandler;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -18,8 +25,17 @@ public class Main {
         //getDateDictator();
         //URLHandler.containsDate("20170123");
         //StructureHandler.HandlePageStructure("http://news.baidu.com/");
-        ContentsHandler.handleContent("http://www.cankaoxiaoxi.com/roll10/bd/20170501/1947112.shtml");
-        testPattern();
+         //ContentsHandler.handleContent("http://www.cankaoxiaoxi.com/roll10/bd/20170501/1947112.shtml");
+        //testPattern();
+        //URLResult result = URLHandler.getURLTrait("http://blog.csdn.net/ligang2585116/article/details/71053133");
+        //System.out.println(result);
+//        StructureResult result = StructureHandler.getStructureTrait("http://www.cankaoxiaoxi.com/roll10/bd/20170501/1947112.shtml");
+//        System.out.println(result);
+       // ContentResult result = ContentsHandler.getContentTrait("http://www.cankaoxiaoxi.com/roll10/bd/20170501/1947112.shtml");
+        //System.out.println(result);
+        HashMap<String,String> news = ExtractComponent.getNews("http://www.cankaoxiaoxi.com/roll10/bd/20170501/1947498.shtml");
+        System.out.println(news.get("title"));
+        System.out.println(news.get("content"));
     }
 
 

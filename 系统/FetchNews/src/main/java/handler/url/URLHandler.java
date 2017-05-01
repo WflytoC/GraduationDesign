@@ -1,5 +1,8 @@
 package handler.url;
 
+import characteristic.URLResult;
+import constants.URLConstants;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -132,6 +135,38 @@ public class URLHandler {
             }
         }
         return containsYearAndMonth;
+    }
+
+    public static URLResult getURLTrait(String webURL) throws MalformedURLException {
+        URL url = new URL(webURL);
+        String path = url.getPath();
+        String[] parts = path.split("/");
+        String lastPart = parts[parts.length - 1];
+        URLResult result = new URLResult();
+
+        for (String support : URLConstants.keyWords_support) {
+            if (webURL.indexOf(support) > -1) {
+                result.setContainsKeywordOfNews(true);
+            }
+        }
+        for (String exclude: URLConstants.keyWords_exclude) {
+            if (webURL.indexOf(exclude) > -1) {
+                result.setContainsKeywordOfNotNews(true);
+            }
+        }
+
+        String transformedStr = transformLastPart(lastPart);
+        if (transformedStr.length() > 4) {
+            result.setLastPartEnoughLong(true);
+        }
+
+        ArrayList<String> dictators = getDateIndicator(parts);
+        String str = concatDateIndicators(dictators);
+        if (containsYearAndMonth(str)) {
+            result.setContainsDateIndicator(true);
+        }
+
+        return result;
     }
 
 }

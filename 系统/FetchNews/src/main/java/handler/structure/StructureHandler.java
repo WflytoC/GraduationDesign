@@ -1,5 +1,7 @@
 package handler.structure;
 
+import characteristic.StructureResult;
+import characteristic.URLResult;
 import constants.NewSources;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -7,6 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 /**
  * Created by wcshi on 2017/5/1.
@@ -38,5 +41,41 @@ public class StructureHandler {
                 System.out.println(element.text());
             }
         }
+    }
+
+    public static StructureResult getStructureTrait(String webURL) throws Exception {
+        Document doc = Jsoup.connect(webURL).userAgent("Mozilla").get();
+        StructureResult result = new StructureResult();
+
+        Elements h1s = doc.select("H1");
+        if (h1s.first() != null) {
+            result.setContainsH1(true);
+            Elements sub = h1s.first().children();
+            if (sub.size() > 0) {
+                result.setH1ContainsElements(true);
+            }
+        }
+
+        Elements h2s = doc.select("H2");
+        if (h1s.first() != null) {
+            result.setContainsH2(true);
+            Elements sub = h2s.first().children();
+            if (sub.size() > 0) {
+                result.setH2ContainsElements(true);
+            }
+        }
+
+        //处理展示新闻内容的p标签
+        Elements ps = doc.select("div > p");
+
+        for (Element element: ps) {
+            //需要排除干扰项
+            Element div = element.parent();
+            Elements children = div.children();
+            if (children.size() > 3) {
+                result.setWebPattern(true);
+            }
+        }
+        return result;
     }
 }
